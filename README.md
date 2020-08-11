@@ -1,27 +1,13 @@
 # objc_debug
-可编译苹果官方源码objc！可编译源码，LLDB调试，方便大家探索学习！
-
-[![Build Status](https://travis-ci.org/LGCooci/objc4_debug.svg?branch=master)](https://travis-ci.org/LGCooci/objc4_debug)
-[![Xcode 10.0+](https://img.shields.io/badge/Xcode-10.0%2B-blue.svg?colorA=3caefc&colorB=24292e)](https://developer.apple.com/xcode/)
-[![VSTS Build](https://alchemistxxd.visualstudio.com/_apis/public/build/definitions/e0656143-5484-4af8-8aa3-01f9baba5da1/1/badge)](https://alchemistxxd.visualstudio.com/Apple%20Open%20Source/_git/objc4)
-![support](https://img.shields.io/badge/support-macOS%20%7C%20iOS-orange.svg) 
-![GitHub top language](https://img.shields.io/github/languages/top/0xxd0/objc4.svg?colorB=6866fb) 
-[![Join the chat at https://gitter.im/0xxd0/objc4](https://badges.gitter.im/0xxd0/objc4.svg)](https://gitter.im/0xxd0/objc4?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+可编译苹果官方源码objc！可编译源码，LLDB调试，方便探索学习！
 
 
-![](https://github.com/LGCooci/objc_debug/blob/master/objc4-756.png)
-
-
-> 很多小伙伴在探索底层的时候经常很苦恼，只能靠猜测！稍微灵活一点的小伙伴会通过 `Apple` 提供的源码来辅助看一下，但是很显然这不太直观！如果能够直接编译调试，像我们自己的代码直接 LLDB 调试，流程跟踪。那简直不要太爽，于是我编译了现在最新的`iOS_objc4-756.2` 
+> 想要探索iOS的底层，就需要查看Apple提供的开源代码。下面是某大神编译`iOS_objc4-756.2` 的步骤。
 
 ### 准备工作
 
-如果想先来体验一把的小伙伴可以直接 [GitHub 源码](https://github.com/LGCooci/objc_debug/tree/master) 下载！
-
 如果你也想亲自体验一把，请你准备条件：
 
-* mac OS 10.14
-* Xcode 10.1
 * objc4-756.2
 
 ![](https://user-gold-cdn.xitu.io/2019/10/8/16dab6bf541f33a7?w=1224&h=450&f=png&s=74063)
@@ -198,7 +184,4 @@ The i386 architecture is deprecated. You should update your ARCHS build setting 
 
 ![](https://user-gold-cdn.xitu.io/2019/10/8/16dabbb3da06cc9d?w=2806&h=660&f=png&s=737329)
 
-### 总结
 
-iOS 现在更多的会偏向底层开发研究，可调式编译的 `objc4 源码`能够帮助更快速学习和更容易理解！博客持续更新中，谢谢大家的关注点赞！Thanks♪(･ω･)ﾉ
-更多博客请关注：[Cooci 掘金博客地址](https://juejin.im/user/5c3f3c415188252b7d0ea40c/posts)
