@@ -213,9 +213,9 @@ objc_object::initIsa(Class cls, bool nonpointer, bool hasCxxDtor)
         assert(!DisableNonpointerIsa);
         assert(!cls->instancesRequireRawIsa());
 
-        isa_t newisa(0);
+        isa_t newisa(0);//相当于初始化isa这个东西，new.相当于给isa赋值属性
 
-#if SUPPORT_INDEXED_ISA
+#if SUPPORT_INDEXED_ISA //表示isa_t中存放的 Class信息是Class 的地址，还是一个索引(根据该索引可在类信息表中查找该类结构地址)
         assert(cls->classArrayIndex() > 0);
         newisa.bits = ISA_INDEX_MAGIC_VALUE;
         // isa.magic is part of ISA_MAGIC_VALUE
