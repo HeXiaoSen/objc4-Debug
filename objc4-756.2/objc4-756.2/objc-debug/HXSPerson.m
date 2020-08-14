@@ -8,5 +8,7 @@
 #import "HXSPerson.h"
 
 @implementation HXSPerson
++ (void)walk {}
+- (void)fly {}
 
 @end

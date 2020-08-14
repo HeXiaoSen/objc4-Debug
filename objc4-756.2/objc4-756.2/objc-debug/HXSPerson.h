@@ -9,13 +9,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HXSPerson : NSObject
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, assign) NSInteger age;
+@interface HXSPerson : NSObject {
+    NSString *nickname;
+}
+@property (nonatomic, copy) NSString *nationality;
 
-@property (nonatomic, assign) long height;
-@property (nonatomic, assign) char c1;
-@property (nonatomic, assign) char c2;
++ (void)walk;
+- (void)fly;
+
 
 @end
 
