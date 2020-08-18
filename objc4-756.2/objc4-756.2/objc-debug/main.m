@@ -171,6 +171,16 @@ int main(int argc, const char * argv[]) {
         objc_msgSend(son, sel_registerName("jump"));//发送实例方法
         objc_msgSend(objc_getClass("HXSSon"), sel_registerName("swim"));//发送类方法
         
+        struct objc_super superInstanceMethod;
+        superInstanceMethod.receiver = son;//实例对象
+        superInstanceMethod.super_class = objc_getClass("HXSFather");//父类对象
+        objc_msgSendSuper(&superInstanceMethod, sel_registerName("walk"));//向父类发送实例方法
+        
+        struct objc_super superClassMethod;
+        superClassMethod.receiver = [son class];//类对象
+        superClassMethod.super_class = class_getSuperclass(object_getClass([son class]));//父类的元类对象
+        objc_msgSendSuper(&superClassMethod, sel_registerName("run"));
+        
 
     }
     return 0;
