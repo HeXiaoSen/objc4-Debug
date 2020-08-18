@@ -124,18 +124,53 @@ void testIMP_classToMetaclass(Class cls) {
 }
 
 
+
+@interface HXSFather : NSObject
+- (void)walk;
++ (void)run;
+@end
+
+@implementation HXSFather
+- (void)walk { NSLog(@"%s", __func__); }
++ (void)run {NSLog(@"%s", __func__);}
+@end
+
+
+@interface HXSSon : HXSFather
+- (void)jump;
++ (void)swim;
+@end
+
+@implementation HXSSon
+
+- (void)jump { NSLog(@"%s", __func__); }
++ (void)swim {NSLog(@"%s", __func__);}
+
+@end
+
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         // insert code here...
         HXSPerson *p = [HXSPerson alloc];
         
         Class cls = object_getClass(p);
+        
+        [p doFirst];
+        [p doSecend];
+        [p doThird];
+        
 //        testObjc_copyIvar_copyProperies(cls);
 //        testObjc_copyMethodList(cls);
 //        testInstanceMethod_classToMetaclass(cls);
 //        testClassMethod_classToMetaclass(cls);
 //        testIMP_classToMetaclass(cls);
-        NSLog(@"Class Name:%@", cls);
+//        NSLog(@"Class Name:%@", cls);
+        
+        HXSSon *son = [HXSSon new];
+        objc_msgSend(son, sel_registerName("jump"));//发送实例方法
+        objc_msgSend(objc_getClass("HXSSon"), sel_registerName("swim"));//发送类方法
+        
 
     }
     return 0;

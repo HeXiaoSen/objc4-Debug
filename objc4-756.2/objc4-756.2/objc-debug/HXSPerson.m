@@ -11,4 +11,8 @@
 + (void)walk {}
 - (void)fly {}
 
+
+- (void)doFirst {}
+- (void)doSecend {}
+- (void)doThird {}
 @end

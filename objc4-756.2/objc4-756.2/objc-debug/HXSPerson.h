@@ -18,6 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)fly;
 
 
+
+- (void)doFirst;
+- (void)doSecend;
+- (void)doThird;
+
 @end
 
 NS_ASSUME_NONNULL_END

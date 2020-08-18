@@ -558,35 +558,38 @@ static void cache_fill_nolock(Class cls, SEL sel, IMP imp, id receiver)
     cacheUpdateLock.assertLocked();
 
     // Never cache before +initialize is done
-    if (!cls->isInitialized()) return;
+    if (!cls->isInitialized()) return; //①类是否初始化对象，没有就返回
 
     // Make sure the entry wasn't added to the cache by some other thread 
     // before we grabbed the cacheUpdateLock.
-    if (cache_getImp(cls, sel)) return;
+    if (cache_getImp(cls, sel)) return; //②传入cls和sel，如果在缓存中查找到imp就返回，不能就下一步
 
-    cache_t *cache = getCache(cls);
-
+    cache_t *cache = getCache(cls); //③调用getCache来获取cls的缓存对象
+    
+//    cache_key_t key = getKey(sel); //该源码中没有这行代码，以前版本有。 通过getKey来获取到缓存的key——其实是将SEL类型强转成cache_key_t类型
+    
     // Use the cache as-is if it is less than 3/4 full
-    mask_t newOccupied = cache->occupied() + 1;
-    mask_t capacity = cache->capacity();
+    mask_t newOccupied = cache->occupied() + 1; //④在cache已经占用的基础上进行加 1，得到的是新的缓存占用大小 newOccupied
+    mask_t capacity = cache->capacity(); //⑤读取现在缓存的容量capacity
+    //⑥判断缓存占用
     if (cache->isConstantEmptyCache()) {
         // Cache is read-only. Replace it.
-        cache->reallocate(capacity, capacity ?: INIT_CACHE_SIZE);
+        cache->reallocate(capacity, capacity ?: INIT_CACHE_SIZE);//如果缓存为空，重新申请一下内存并覆盖之前的缓存
     }
     else if (newOccupied <= capacity / 4 * 3) {
-        // Cache is less than 3/4 full. Use it as-is.
+        // Cache is less than 3/4 full. Use it as-is. 如果新的缓存占用大小<=缓存容量的四分之三，则可以进行缓存流程
     }
     else {
-        // Cache is too full. Expand it.
+        // Cache is too full. Expand it. 如果缓存不为空，且缓存占用大小已经超过了容量的四分之三，则需要进行扩容
         cache->expand();
     }
 
     // Scan for the first unused slot and insert there.
     // There is guaranteed to be an empty slot because the 
     // minimum size is 4 and we resized at 3/4 full.
-    bucket_t *bucket = cache->find(sel, receiver);
-    if (bucket->sel() == 0) cache->incrementOccupied();
-    bucket->set<Atomic>(sel, imp);
+    bucket_t *bucket = cache->find(sel, receiver); //⑦通过key在缓存中查找到对应的bucket_t
+    if (bucket->sel() == 0) cache->incrementOccupied(); //⑧如果⑦找到的bucket中key为0，那么_occupied++
+    bucket->set<Atomic>(sel, imp); //⑨把key、imp成对放入bucket
 }
 
 void cache_fill(Class cls, SEL sel, IMP imp, id receiver)
